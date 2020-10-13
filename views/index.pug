@@ -1,0 +1,35 @@
+extends layout
+
+block content   
+    
+  .row.my-5
+    .col-6
+      h2.text-primary Feladat lista
+      ul.list-group
+        each task in tasks
+          a(href=`/edit/${task.id}`, title="title")
+            li.list-group-item
+              h3.text-info=task.title
+              p.text-dark=task.desc
+              if task.priority == "LOW"
+                p.text-success=task.priority
+              if task.priority == "MEDIUM"
+                p.text-warning=task.priority
+              if task.priority == "HIGH"
+                p.text-danger=task.priority
+    .col-6
+      h2.text-primary Feladat létrehozása
+      form(id="createForm")
+        .form-group
+          label(for="title") Title
+          input(type="text" name="title", id="title").form-control
+        .form-group
+          label(for="desc") Leírás
+          textarea(type="text" name="desc", id="desc").form-control
+        .form-group
+          label(for="priority") priority
+          select(name="priority" id="priority").form-control
+            option(value="LOW") LOW
+            option(value="MEDIUM") MEDIUM
+            option(value="HIGH") HIGH
+        button(type="submit").btn.btn-primary Elküldés

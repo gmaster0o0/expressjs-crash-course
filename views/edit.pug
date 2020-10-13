@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .container
+    h2.text-primary.py-2 Feladat módisítása
+    if(task)
+      form(id="editForm")
+        .form-group
+          label(for="title") Title
+          input.form-control(type="text" name="title", id="title", value=`${task.title}`)
+        .form-group
+          label(for="desc") Leírás
+          textarea.form-control(type="text" name="desc", id="desc")= task.desc
+        .form-group
+          label(for="priority") priority
+          select(name="priority" id="priority").form-control
+            option(value="LOW" selected= task.priority === "LOW") LOW
+            option(value="MEDIUM" selected= task.priority === "MEDIUM") MEDIUM
+            option(value="HIGH" selected= task.priority === "HIGH") HIGH
+        button.btn.btn-primary(type="submit" class=`edit_${task.id}` id="editButton") Elküldés
+      button.btn.btn-danger(class=`delete_${task.id}` id="deleteButton") Task Törlése
